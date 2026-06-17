@@ -1,0 +1,13 @@
+System,Stock,Age,NumModels,ModelLabel
+Columbia River,Bonneville Lock & Dam,Age 3,1,Naive8
+Columbia River,Bonneville Lock & Dam,Age 4,2,SibRegLogPower SibRegKalman
+Columbia River,Bonneville Lock & Dam,Age 5,1,SibRegKalman
+Columbia River,Bonneville Lock & Dam,Total,2,SibRegLogPower SibRegKalman
+Columbia River,Okanagan,Age 3,5,SibRegSimple SibRegLogPower SibRegKalman TimeSeriesArimaBC Naive4
+Columbia River,Okanagan,Age 4,2,SibRegKalman SibRegLogPower
+Columbia River,Okanagan,Age 5,2,SibRegSimple SibRegLogPower
+Columbia River,Okanagan,Total,2,SibRegKalman SibRegLogPower
+Columbia River,Wenatchee,Age 3,2,TimeSeriesArimaNoBC TimeSeriesArimaBC
+Columbia River,Wenatchee,Age 4,4,Naive8 SibRegKalman TimeSeriesExpSmoothBC SibRegLogPower
+Columbia River,Wenatchee,Age 5,1,SibRegSimple
+Columbia River,Wenatchee,Total,4,Naive8 TimeSeriesExpSmoothNoBC TimeSeriesExpSmoothBC SibRegLogPower

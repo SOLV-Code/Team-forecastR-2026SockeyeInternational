@@ -29,10 +29,55 @@ We're approaching this as an illustration of the full workflow we've designed th
 
 For our entry in the [2025 competition](https://github.com/SOLV-Code/Team-forecastR-2025SockeyeInternational) we restricted the analyses to model forms that were already included in the package and built detailed notes for each step in the workflow. Refer to the [2025 Notes](https://github.com/SOLV-Code/Team-forecastR-2025SockeyeInternational/tree/main/NOTES) for details.
 
-For the 2026 competition, we are approaching the 3 systems differently:
+For the 2026 competition, we are approaching the 3 systems differently.
 
-* *Columbia*: Apply same set of short-listed model types as in 2025, but (1) revisit model selection considerations in light of 2025 performance of alternative models, and (2) apply the same models to the newly added component stocks (Okanagan, Wenatchee).
+### Columbia
 
-* *Bristol Bay*: Apply same set of short-listed model types as in 2025, plus test the spawner-recruit models being developed for the next *forecastR* upgrade.
+*Approach*
 
-* *Fraser*: Apply same set of short-listed model types as in 2025, plus test the spawner-recruit models being developed for the next *forecastR* upgrade, plus explore some new Fraser-specific environmental covariates.
+Apply same set of short-listed model types as in 2025, but (1) revisit model selection considerations in light of 2025 performance of alternative models, and (2) apply the same models to the newly added component stocks (Okanagan, Wenatchee).
+   
+* In 2025 for "Bonneville Lock & Dam", Simple SibReg for all ages would have been closest to observed, but model ranking pointed to age-specific SibReg variations (LogPower, Kalman). 
+
+* For 2026, the total forecasts for the 3 SibReg variations differ a lot for all three stocks, with Simple SibReg much lower than the other two for all three stocks. For Wenatchee, for example, the total forecasts by sib reg type are: SibRegSimple = 35,231, SibRegLogPower = 80,281, SibRegKalman	= 125,462). 
+
+* Retrospective ranking generally favors either Log-Power or Kalman sib reg, but 2025 experience points to Simple SibReg for Okanagan and Bonneville Lock & Dam. 
+
+* Need to develop a better selection rationale, but for now just go with simple sib reg for all 3 stocks, based on 2025 experience.
+
+*Model Selections By Stock*
+
+
+System | 	Stock | 	Age 3	 | Age 4 | 	Age 5
+-- | -- | -- | -- | -- 
+Columbia River|	Bonneville Lock & Dam|		Naive8: Basic|		SibRegSimple: Based on 2025 experience|		SibRegSimple: Based on 2025 experience
+Columbia River|		Wenatchee|		Naive8: Basic|		SibRegLogPower: Based on retrospective plot	|	SibRegLogPower: Based on retrospective plot
+Columbia River|		Okanagan|		Naive8: Basic|		SibRegSimple: Based on 2025 experience|		SibRegSimple: Based on 2025 experience
+
+
+*2026 Forecasts and Retrospective 2021-2025 Forecasts
+
+Results below reproduced from the file *Forecast_Totals_ByYear_SumOfMedians.csv.csv*, which shows the sum of age-specific median forecasts from the residual bootstrap intervals. An alternative version in the file *Forecast_Totals_ByYear_SumOfPtFC.csv* shows to sum age-specific point forecasts. For age-specific point forecasts and intervals, check *Forecast_Details.csv*. All 3 files are in the [FORECASTS_Columbia/OUTPUT folder](https://github.com/SOLV-Code/Team-forecastR-2026SockeyeInternational/tree/main/FORECASTS_Columbia/OUTPUT). Retrospective diagnostic plots are in the [OUTPUT/Retrospective_Diagnostics folder](https://github.com/SOLV-Code/Team-forecastR-2026SockeyeInternational/tree/main/FORECASTS_Columbia/OUTPUT/Retrospective_Diagnostics). 
+
+
+System|	Stock|		2021|	2022|		2023|		2024|		2025|		2026|	
+-- | -- | -- | -- | -- | -- | -- | -- 
+Columbia River|		Bonneville Lock & Dam|		60465|		341277|		162629|		273111|		172674|		59134
+Columbia River|		Okanagan|		46854|		191551|		114523|		221489|		122606|		44167
+Columbia River|		Wenatchee|		42784|		43716|		57100|		201619|		70789|		53657
+
+
+<img src="https://github.com/SOLV-Code/Team-forecastR-2026SockeyeInternational/blob/main/FORECASTS_Columbia/OUTPUT/Retrospective_Diagnostics/AllStocks_Obs_vs_FC.PNG" width="800">
+
+
+### Bristol Bay
+Apply same set of short-listed model types as in 2025, plus test the spawner-recruit models being developed for the next *forecastR* upgrade.
+
+
+
+
+### Fraser
+
+Apply same set of short-listed model types as in 2025, plus test the spawner-recruit models being developed for the next *forecastR* upgrade, plus explore some new Fraser-specific environmental covariates.
+
+
