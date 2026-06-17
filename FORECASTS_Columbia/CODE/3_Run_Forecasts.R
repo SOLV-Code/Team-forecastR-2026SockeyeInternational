@@ -94,7 +94,7 @@ ranking.out$`Age 4`
 
 
 ################################################################################
-# APPLY FULL SET OF 9 CANDIDATE MODELS TO ALL 14 STOCKS FOR FC YEARS 2020-2025
+# APPLY FULL SET OF 9 CANDIDATE MODELS TO ALL 3 COLUMBIA STOCKS FOR FC YEARS 2021-2026
 
 # TO DO
 # - loop through full data set vs. trimmed ~ 2000
@@ -103,15 +103,15 @@ ranking.out$`Age 4`
 start.time <-  proc.time()
 
 # get a list of all alternative input files
-files.list <- list.files("DATA/3_ProcessedData/ForecastR_InputFiles")
+files.list <- list.files("FORECASTS_Columbia/DATA/3_ProcessedData/ForecastR_InputFiles")
 files.list
 
-files.paths <- list.files("DATA/3_ProcessedData/ForecastR_InputFiles",full.names = TRUE)
+files.paths <- list.files("FORECASTS_Columbia/DATA/3_ProcessedData/ForecastR_InputFiles",full.names = TRUE)
 files.paths
 
 # if want to keep a log for debugging, change to TRUE
 do.log <- FALSE
-if(do.log){sink("OUTPUT/ModelFitting_Log.txt")} # open the log file
+if(do.log){sink("FORECASTS_Columbia/OUTPUT/ModelFitting_Log.txt")} # open the log file
 
 
 if(exists("results.store")){rm(results.store)}
@@ -143,9 +143,12 @@ multiresults.retro <- multiFC(data.file=data.raw,
 
 ranking.pm.use <- c("MRE", "MAE", "MPE", "MAPE", "MASE", "RMSE")
 
-ranking.out <- rankModels(dat = multiresults.retro$retro.pm$retro.pm.bal,
-                          columnToRank=ranking.pm.use, relative.bol=TRUE) # TRUE means scaled ranking
+#ranking.out <- rankModels(dat = multiresults.retro$retro.pm$retro.pm.bal,
+#                          columnToRank=ranking.pm.use, relative.bol=TRUE) # TRUE means scaled ranking
 
+
+ranking.out <- rankModels(dat = multiresults.retro$retro.pm$retro.pm.bal,
+                          columnToRank=ranking.pm.use, relative.bol=FALSE) # TRUE means scaled ranking
 
 
 
@@ -215,7 +218,7 @@ proc.time() - start.time
 results.store <- results.store %>% left_join(stk.lookup%>% dplyr::rename(Stock=River),by="Stock") %>% select(Stock,everything())
 
 write_csv(results.store %>%  mutate(across(c(PointFC,starts_with("p")),\(x) round(x, 0))),
-          "OUTPUT/FullOutputs_ForecastsAndRanks.csv")
+          "FORECASTS_Columbia/OUTPUT/FullOutputs_ForecastsAndRanks.csv")
 
 
 
@@ -225,7 +228,7 @@ results.top1 <- results.store %>% group_by(Stock,Age,FC_Year) %>% slice_min(AvgR
         mutate(across(c(PointFC,starts_with("p")),\(x) round(x, 0)))
 
 
-write_csv(results.top1,"OUTPUT/Top1_ForecastsAndRanks.csv")
+write_csv(results.top1,"FORECASTS_Columbia/OUTPUT/Top1_ForecastsAndRanks.csv")
 
 
 
@@ -234,7 +237,7 @@ results.top3 <- results.store %>% group_by(Stock,Age,FC_Year) %>% slice_min(AvgR
   arrange(System,Stock,Age,FC_Year,AvgRankByAge) %>% select(System,Stock,Age,FC_Year,AvgRankByAge,ModelLabel,everything()) %>%
   mutate(across(c(PointFC,starts_with("p")),\(x) round(x, 0)))
 
-write_csv(results.top3,"OUTPUT/Top3_ForecastsAndRanks.csv")
+write_csv(results.top3,"FORECASTS_Columbia/OUTPUT/Top3_ForecastsAndRanks.csv")
 
 
 
@@ -244,18 +247,18 @@ results.topmodels.byage <- results.top1 %>% ungroup() %>% group_by(System,Stock,
       by=c("System","Stock","Age")
 )
 
-write_csv(results.topmodels.byage ,"OUTPUT/TopModels_ListByAge.csv")
-
+write_csv(results.topmodels.byage ,"FORECASTS_Columbia/OUTPUT/TopModels_ListByAge.csv")
 
 
 ###########################################################
 # STEP 7:  Reorg the selected model list and extract forecasts
 # source file manually generated from results.topmodels.byage
-# Details in Step 7: https://github.com/SOLV-Code/Team-forecastR-2025SockeyeInternational/tree/main/NOTES/7_Select_2025FC
+# Details in Step 7 from the 2025 Notes: https://github.com/SOLV-Code/Team-forecastR-2025SockeyeInternational/tree/main/NOTES/7_Select_2025FC
+# Additional 2026 notes in the file
 
-
-selected.models <- read_csv("DATA/2_Lookup_Files/MANUAL_UPDATES_ModelSelection.csv")
+selected.models <- read_csv("FORECASTS_Columbia/DATA/2_Lookup_Files/MANUAL_UPDATES_ModelSelection.csv")
 selected.models
+
 
 
 
@@ -264,17 +267,17 @@ selection.table.src <- selected.models %>% mutate(Selection = paste0(ModelLabel,
   pivot_wider(id_cols = c(System, Stock),names_from = Age, values_from = Selection)
 
 
-write_csv(selection.table.src ,"OUTPUT/ModelSelection_Table.csv")
+write_csv(selection.table.src ,"FORECASTS_Columbia/OUTPUT/ModelSelection_Table.csv")
 
 
 # extract corresponding forecasts
 
-fc.details <- bind_rows(selected.models   %>% mutate(FC_Year = 2020),
-                        selected.models   %>% mutate(FC_Year = 2021),
+fc.details <- bind_rows(selected.models   %>% mutate(FC_Year = 2021),
                         selected.models   %>% mutate(FC_Year = 2022),
                         selected.models   %>% mutate(FC_Year = 2023),
                         selected.models   %>% mutate(FC_Year = 2024),
-                        selected.models   %>% mutate(FC_Year = 2025)
+                        selected.models   %>% mutate(FC_Year = 2025),
+                        selected.models   %>% mutate(FC_Year = 2026)
                         )
 
 
@@ -283,21 +286,26 @@ fc.details <- bind_rows(selected.models   %>% mutate(FC_Year = 2020),
 fc.details <- fc.details  %>% left_join(results.store,
                         by=c("System","Stock","Age","FC_Year","ModelLabel") )
 
-write_csv(fc.details ,"OUTPUT/Forecast_Details.csv")
+write_csv(fc.details ,"FORECASTS_Columbia/OUTPUT/Forecast_Details.csv")
 
 
 fc.SumOfMedians <- fc.details %>% group_by(System,Stock,FC_Year) %>% summarize(SumOfMedians=sum(p50)) %>%
   pivot_wider(id_cols=c(System,Stock),names_from = FC_Year,values_from = SumOfMedians)
 
-write_csv(fc.SumOfMedians ,"OUTPUT/Forecast_Totals_ByYear_SumOfMedians.csv")
-
-
+write_csv(fc.SumOfMedians ,"FORECASTS_Columbia/OUTPUT/Forecast_Totals_ByYear_SumOfMedians.csv")
 
 
 fc.SumOfPtFC <- fc.details %>% group_by(System,Stock,FC_Year) %>% summarize(SumOfPtFC=sum(PointFC)) %>%
   pivot_wider(id_cols=c(System,Stock),names_from = FC_Year,values_from = SumOfPtFC)
 
-write_csv(fc.SumOfPtFC ,"OUTPUT/Forecast_Totals_ByYear_SumOfPtFC.csv")
+write_csv(fc.SumOfPtFC ,"FORECASTS_Columbia/OUTPUT/Forecast_Totals_ByYear_SumOfPtFC.csv")
+
+
+
+
+
+
+
 
 
 ##############################################################
@@ -305,22 +313,19 @@ write_csv(fc.SumOfPtFC ,"OUTPUT/Forecast_Totals_ByYear_SumOfPtFC.csv")
 
 library(tidyverse)
 
-# check object from script 1
-names(full.data.long.df)
 
 
+if(!dir.exists("FORECASTS_Columbia/OUTPUT/Retrospective_Diagnostics")){dir.create("FORECASTS_Columbia/OUTPUT/Retrospective_Diagnostics")}
 
-if(!dir.exists("OUTPUT/Retrospective_Diagnostics")){dir.create("OUTPUT/Retrospective_Diagnostics")}
 
-
-png(filename = "OUTPUT/Retrospective_Diagnostics/AllStocks_Obs_vs_FC.PNG",
+png(filename = "FORECASTS_Columbia/OUTPUT/Retrospective_Diagnostics/AllStocks_Obs_vs_FC.PNG",
     width = 480*9, height = 480*7, units = "px",
-    pointsize = 14*4.3,
+    pointsize = 14*4.7,
     bg = "white",  res = NA)
 
 
-par(mfrow = c(4,4),
-    mai=c(2.8,2.8,2.5,1))
+par(mfrow = c(2,2),
+    mai=c(3.5,3.5,3,1))
 
 
 
@@ -332,7 +337,7 @@ system.label <-  stk.lookup %>% dplyr::filter(River == stk.do)  %>% select(Syste
 
 
 
-obs.ret.stk <-   full.data.long.df %>% dplyr::filter(River == stk.do, ReturnYear >=2010) %>%
+obs.ret.stk <-   columbia.src %>% dplyr::filter(River == stk.do, ReturnYear >=2010) %>%
                   select(ReturnYear, Total_Returns) %>% unique()
 
 fc.stk <- fc.SumOfMedians %>% dplyr::filter(Stock == stk.do) %>%
@@ -355,13 +360,13 @@ if(y.max < 10^3){scalar.use <- 1 ; scalar.label <-""}
 
 plot(obs.ret.stk$ReturnYear,obs.ret.stk$Total_Returns/scalar.use,type="o",
      axes=FALSE,pch=21,col="darkblue",bg="lightgrey",lwd=3,cex=2,
-     xlim=c(2010,2025), ylim = c(0,y.max/scalar.use),
+     xlim=c(2010,2030), ylim = c(0,y.max/scalar.use),
      xlab="Return Year",ylab= paste0("Total Returns",scalar.label),
      main=paste0(stk.do," (",system.label,")") ,xpd=NA)
 axis(1)
 axis(2,las=1)
 
-rect(2024.5,0,2025.5,y.max/scalar.use,col="azure2",border="azure2")
+rect(2025.5,0,2026.5,y.max/scalar.use,col="azure2",border="azure2")
 
 lines(fc.stk$ReturnYear,fc.stk$SumOfPointFC /scalar.use,type="o",
       col="red",bg="white",lwd=2,pch=21,cex=1.3)
