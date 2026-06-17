@@ -1,0 +1,55 @@
+System,River,Label,Perc_Min,Perc_p10,Perc_p25,Perc_Med,Perc_p75,Perc_p90,Perc_Max,Age,FW_Winters,Mar_Winters,Euro,GR
+Columbia River,Bonneville Lock & Dam,AgeClass_0.1,0,0,0,0,0,0,0,2,0,1,0.1,2_1
+Columbia River,Bonneville Lock & Dam,AgeClass_0.2,0,0,0,0,0,0,0,3,0,2,0.2,3_1
+Columbia River,Bonneville Lock & Dam,AgeClass_0.3,0,0,0,0,0,0,0,4,0,3,0.3,4_1
+Columbia River,Bonneville Lock & Dam,AgeClass_0.4,0,0,0,0,0,0,0,5,0,4,0.4,5_1
+Columbia River,Bonneville Lock & Dam,AgeClass_0.5,0,0,0,0,0,0,0,6,0,5,0.5,6_1
+Columbia River,Bonneville Lock & Dam,AgeClass_1.1,0,1.14,2.71,4.58,7.27,14.44,100,3,1,1,1.1,3_2
+Columbia River,Bonneville Lock & Dam,AgeClass_1.2,40.38,55.78,71.08,79.07,87.06,90.02,92.58,4,1,2,1.2,4_2
+Columbia River,Bonneville Lock & Dam,AgeClass_1.3,0.38,2.93,4.67,6.38,10.61,13.13,31.23,5,1,3,1.3,5_2
+Columbia River,Bonneville Lock & Dam,AgeClass_1.4,0,0,0,0,0,0,0,6,1,4,1.4,6_2
+Columbia River,Bonneville Lock & Dam,AgeClass_1.5,0,0,0,0,0,0,0,7,1,5,1.5,7_2
+Columbia River,Bonneville Lock & Dam,AgeClass_2.1,0,0.1,0.38,0.98,2.27,5.85,52.31,4,2,1,2.1,4_3
+Columbia River,Bonneville Lock & Dam,AgeClass_2.2,0.1,0.36,1.86,3.35,7.79,21.96,86.53,5,2,2,2.2,5_3
+Columbia River,Bonneville Lock & Dam,AgeClass_2.3,0,0,0,0.08,0.255,0.9320000000000004,3.56,6,2,3,2.3,6_3
+Columbia River,Bonneville Lock & Dam,AgeClass_2.4,0,0,0,0,0,0,0,7,2,4,2.4,7_3
+Columbia River,Bonneville Lock & Dam,AgeClass_3.1,0,0,0,0,0,0.21,15.94,5,3,1,3.1,5_4
+Columbia River,Bonneville Lock & Dam,AgeClass_3.2,0,0,0,0,0,0.02500000000000007,1.59,6,3,2,3.2,6_4
+Columbia River,Bonneville Lock & Dam,AgeClass_3.3,0,0,0,0,0,0,0.03,7,3,3,3.3,7_4
+Columbia River,Bonneville Lock & Dam,AgeClass_3.4,0,0,0,0,0,0,0,8,3,4,3.4,8_4
+Columbia River,Okanagan,AgeClass_0.1,0,0,0,0,0,0,0,2,0,1,0.1,2_1
+Columbia River,Okanagan,AgeClass_0.2,0,0,0,0,0,0,0,3,0,2,0.2,3_1
+Columbia River,Okanagan,AgeClass_0.3,0,0,0,0,0,0,0,4,0,3,0.3,4_1
+Columbia River,Okanagan,AgeClass_0.4,0,0,0,0,0,0,0,5,0,4,0.4,5_1
+Columbia River,Okanagan,AgeClass_0.5,0,0,0,0,0,0,0,6,0,5,0.5,6_1
+Columbia River,Okanagan,AgeClass_1.1,0.21,3.6980000000000004,4.8,6.06,8.885,11.600000000000001,100,3,1,1,1.1,3_2
+Columbia River,Okanagan,AgeClass_1.2,46.53,79.526,81.97999999999999,86.45,88.725,90.846,94.56,4,1,2,1.2,4_2
+Columbia River,Okanagan,AgeClass_1.3,0,0.18800000000000006,1.4,2.39,5.199999999999999,7.722,33.18,5,1,3,1.3,5_2
+Columbia River,Okanagan,AgeClass_1.4,0,0,0,0,0,0,0,6,1,4,1.4,6_2
+Columbia River,Okanagan,AgeClass_1.5,0,0,0,0,0,0,0,7,1,5,1.5,7_2
+Columbia River,Okanagan,AgeClass_2.1,0,0.018000000000000016,0.19,1.06,3.175,5.69,9.12,4,2,1,2.1,4_3
+Columbia River,Okanagan,AgeClass_2.2,0.16,1.072,1.37,2.29,4.26,7.846,66.82,5,2,2,2.2,5_3
+Columbia River,Okanagan,AgeClass_2.3,0,0,0,0,0,0.19400000000000034,0.89,6,2,3,2.3,6_3
+Columbia River,Okanagan,AgeClass_2.4,0,0,0,0,0,0,0,7,2,4,2.4,7_3
+Columbia River,Okanagan,AgeClass_3.1,0,0,0,0,0,0,0,5,3,1,3.1,5_4
+Columbia River,Okanagan,AgeClass_3.2,0,0,0,0,0,0,0,6,3,2,3.2,6_4
+Columbia River,Okanagan,AgeClass_3.3,0,0,0,0,0,0,0,7,3,3,3.3,7_4
+Columbia River,Okanagan,AgeClass_3.4,0,0,0,0,0,0,0,8,3,4,3.4,8_4
+Columbia River,Wenatchee,AgeClass_0.1,0,0,0,0,0,0,0,2,0,1,0.1,2_1
+Columbia River,Wenatchee,AgeClass_0.2,0,0,0,0,0,0,0,3,0,2,0.2,3_1
+Columbia River,Wenatchee,AgeClass_0.3,0,0,0,0,0,0,0,4,0,3,0.3,4_1
+Columbia River,Wenatchee,AgeClass_0.4,0,0,0,0,0,0,0,5,0,4,0.4,5_1
+Columbia River,Wenatchee,AgeClass_0.5,0,0,0,0,0,0,0,6,0,5,0.5,6_1
+Columbia River,Wenatchee,AgeClass_1.1,0,0,0,0,0,0.15800000000000028,0.63,3,1,1,1.1,3_2
+Columbia River,Wenatchee,AgeClass_1.2,0,52.501999999999995,73.59,81.29,88.435,92.872,100,4,1,2,1.2,4_2
+Columbia River,Wenatchee,AgeClass_1.3,1.13,5.816000000000001,10.535,18.08,22.439999999999998,38.59000000000002,100,5,1,3,1.3,5_2
+Columbia River,Wenatchee,AgeClass_1.4,0,0,0,0,0,0,0,6,1,4,1.4,6_2
+Columbia River,Wenatchee,AgeClass_1.5,0,0,0,0,0,0,0,7,1,5,1.5,7_2
+Columbia River,Wenatchee,AgeClass_2.1,0,0,0,0,0,0,0.43,4,2,1,2.1,4_3
+Columbia River,Wenatchee,AgeClass_2.2,0,0,0.46,2.24,8.225000000000001,13.340000000000003,47.41,5,2,2,2.2,5_3
+Columbia River,Wenatchee,AgeClass_2.3,0,0,0,0,0,0.08100000000000018,7.13,6,2,3,2.3,6_3
+Columbia River,Wenatchee,AgeClass_2.4,0,0,0,0,0,0,0,7,2,4,2.4,7_3
+Columbia River,Wenatchee,AgeClass_3.1,0,0,0,0,0,0,0,5,3,1,3.1,5_4
+Columbia River,Wenatchee,AgeClass_3.2,0,0,0,0,0,0,0,6,3,2,3.2,6_4
+Columbia River,Wenatchee,AgeClass_3.3,0,0,0,0,0,0,0,7,3,3,3.3,7_4
+Columbia River,Wenatchee,AgeClass_3.4,0,0,0,0,0,0,0,8,3,4,3.4,8_4
