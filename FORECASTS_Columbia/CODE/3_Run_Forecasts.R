@@ -5,8 +5,8 @@
 
 # install/load required packages
 
-library(devtools) # Load the devtools package.
-install_github("SOLV-Code/forecastR_package")
+#library(devtools) # Load the devtools package.
+#install_github("SOLV-Code/forecastR_package")
 
 library(forecastR)
 
@@ -24,7 +24,8 @@ library(tidyverse)
 #  load and prepare a sample input file
 
 
-data.raw <- read.csv("DATA/3_ProcessedData/ForecastR_InputFiles/ForecastR_Input_Bonneville Lock & Dam_ForecastYear2025.csv") 
+data.raw <- read.csv("FORECASTS_Columbia/DATA/3_ProcessedData/ForecastR_InputFiles/ForecastR_Input_Bonneville Lock & Dam_ForecastYear2025.csv")
+
 data.prepped <- prepData(data.raw ,out.labels="v2") # this pre-processes the inut file
 names(data.prepped)
 
@@ -37,14 +38,14 @@ data.prepped$sibreg.in
 
 # fit a candidate model, plot the model fit, and calculate the 2025 forecast for the model
 
-sample.fit.arima <- fitModel(model= "TimeSeriesArima", data = data.prepped$data, settings = 
+sample.fit.arima <- fitModel(model= "TimeSeriesArima", data = data.prepped$data, settings =
                                 list(BoxCox=FALSE),tracing=TRUE)
 
 plotModelFit(sample.fit.arima,
              options = list(plot.which = "resid_ts", age.which = "Age 4", plot.add = FALSE))
 
 
-sample.fc.out <- calcFC(fit.obj= sample.fit.arima,data = data.prepped$data, fc.yr= 2025,  
+sample.fc.out <- calcFC(fit.obj= sample.fit.arima,data = data.prepped$data, fc.yr= 2025,
                    		 settings = list(BoxCox=FALSE), tracing=TRUE)	# IMPORTANT THAT SETTINGS ARE THE SAME!
 
 print(sample.fc.out)
@@ -116,11 +117,11 @@ if(do.log){sink("OUTPUT/ModelFitting_Log.txt")} # open the log file
 if(exists("results.store")){rm(results.store)}
 
 for(i in 1:length(files.list)){
-  
-file.name <- files.list[i]  
+
+file.name <- files.list[i]
 stk.label  <- str_split(file.name,pattern="_")[[1]][3]
 fc.yr <- as.numeric(gsub(".csv","",gsub("ForecastYear","",str_split(file.name,pattern="_")[[1]][4])))
-  
+
 print("#########################################################")
 print(file.name)
 print(stk.label)
@@ -128,8 +129,8 @@ print(fc.yr)
 
 print("#########################################################")
 
-data.raw <- read.csv(files.paths[i])  
-  
+data.raw <- read.csv(files.paths[i])
+
 multiresults.retro <- multiFC(data.file=data.raw,
                               settings.list=settings.use,
                               do.retro=TRUE,
@@ -152,9 +153,9 @@ ranking.out <- rankModels(dat = multiresults.retro$retro.pm$retro.pm.bal,
 multiresults.retro$table.ptfc
 multiresults.retro$retro.pm$retro.pm.bal[,,'Age 4']
 ranking.out$bestmodel
-ranking.out$`Age 4`  
-multiresults.retro$int.array  
-  
+ranking.out$`Age 4`
+multiresults.retro$int.array
+
 
 
   results.out <- multiresults.retro$table.ptfc %>% rownames_to_column("ModelLabel") %>%
@@ -167,30 +168,30 @@ if(exists("ranking.tmp")){rm(ranking.tmp)}
 for(age.do in c("Age 3", "Age 4","Age 5","Age 6","Total")){
 
 if(age.do %in% names(ranking.out)){
-  
-print(age.do)  
-if(exists("ranking.tmp")){  
+
+print(age.do)
+if(exists("ranking.tmp")){
   ranking.tmp <- bind_rows(ranking.tmp,
             ranking.out[[age.do]] %>% select(rank.avg) %>% rownames_to_column("ModelLabel") %>% mutate(Age = age.do)
-            )}  
+            )}
 if(!exists("ranking.tmp")){
 ranking.tmp <- ranking.out[[age.do]] %>% select(rank.avg) %>% rownames_to_column("ModelLabel") %>% mutate(Age = age.do) }
 
-} # end if age   
-  
-  
+} # end if age
+
+
 } # end looping through ages
 
 
 
 results.out <- results.out %>% left_join(ranking.tmp %>% dplyr::rename(AvgRankByAge = rank.avg),
                                          by=c("ModelLabel","Age")) %>%  # add ranking info
- left_join(as.data.frame.table(multiresults.retro$int.array) %>% arrange(Var1) %>% 
+ left_join(as.data.frame.table(multiresults.retro$int.array) %>% arrange(Var1) %>%
   dplyr::rename(ModelLabel = Var1, Age = Var3) %>%
   pivot_wider(names_from = Var2, values_from = Freq),
   by=c("ModelLabel","Age"))  # add intervals
 
-if(exists("results.store")){results.store <- bind_rows(results.store,results.out)}  
+if(exists("results.store")){results.store <- bind_rows(results.store,results.out)}
 if(!exists("results.store")){results.store <- results.out }
 
 
@@ -238,7 +239,7 @@ write_csv(results.top3,"OUTPUT/Top3_ForecastsAndRanks.csv")
 
 
 results.topmodels.byage <- results.top1 %>% ungroup() %>% group_by(System,Stock,Age)%>% summarise(NumModels = length(unique(ModelLabel))) %>%
-  left_join(results.top1 %>% ungroup() %>% group_by(System,Stock,Age)%>% 
+  left_join(results.top1 %>% ungroup() %>% group_by(System,Stock,Age)%>%
               summarise(ModelLabel = paste(unique(ModelLabel), collapse = ' ')),
       by=c("System","Stock","Age")
 )
@@ -254,12 +255,12 @@ write_csv(results.topmodels.byage ,"OUTPUT/TopModels_ListByAge.csv")
 
 
 selected.models <- read_csv("DATA/2_Lookup_Files/MANUAL_UPDATES_ModelSelection.csv")
-selected.models 
+selected.models
 
 
 
 selection.table.src <- selected.models %>% mutate(Selection = paste0(ModelLabel,": ",Notes)) %>%
-  select(-ModelLabel,-Notes) %>% 
+  select(-ModelLabel,-Notes) %>%
   pivot_wider(id_cols = c(System, Stock),names_from = Age, values_from = Selection)
 
 
@@ -319,7 +320,7 @@ png(filename = "OUTPUT/Retrospective_Diagnostics/AllStocks_Obs_vs_FC.PNG",
 
 
 par(mfrow = c(4,4),
-    mai=c(2.8,2.8,2.5,1))  
+    mai=c(2.8,2.8,2.5,1))
 
 
 
@@ -328,8 +329,8 @@ for(stk.do in stk.list.all){
 
 
 system.label <-  stk.lookup %>% dplyr::filter(River == stk.do)  %>% select(System) %>% unlist()
-    
-  
+
+
 
 obs.ret.stk <-   full.data.long.df %>% dplyr::filter(River == stk.do, ReturnYear >=2010) %>%
                   select(ReturnYear, Total_Returns) %>% unique()

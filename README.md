@@ -27,11 +27,11 @@ The Salmon Prize competitions offer a great opportunity to showcase our tool kit
 
 We're approaching this as an illustration of the full workflow we've designed the **forecastR** tool kit for. 
 
-For our entry in the [2025 competition](https://github.com/SOLV-Code/Team-forecastR-2025SockeyeInternational) we restricted the analyses to model forms that were already included in the package and built detailed notes for each step in the workflow.
+For our entry in the [2025 competition](https://github.com/SOLV-Code/Team-forecastR-2025SockeyeInternational) we restricted the analyses to model forms that were already included in the package and built detailed notes for each step in the workflow. Refer to the [2025 Notes](https://github.com/SOLV-Code/Team-forecastR-2025SockeyeInternational/tree/main/NOTES) for details.
 
 For the 2026 competition, we are approaching the 3 systems differently:
 
-* *Columbia*: Apply same set of short-listed model types as in 2025, but revisit model selection considerations in light of 2025 performance of alternative models.
+* *Columbia*: Apply same set of short-listed model types as in 2025, but (1) revisit model selection considerations in light of 2025 performance of alternative models, and (2) apply the same models to the newly added component stocks (Okanagan, Wenatchee).
 
 * *Bristol Bay*: Apply same set of short-listed model types as in 2025, plus test the spawner-recruit models being developed for the next *forecastR* upgrade.
 

@@ -1,0 +1,10 @@
+System,Stock,Age,ModelLabel,Notes
+Columbia River,Bonneville Lock & Dam,Age 3,Naive8,Top-ranked all years
+Columbia River,Bonneville Lock & Dam,Age 4,SibRegLogPower,Top-ranked all years
+Columbia River,Bonneville Lock & Dam,Age 5,SibRegKalman,Top-ranked all years
+Columbia River,Wenatchee,Age 3,Naive8,Top-ranked all years
+Columbia River,Wenatchee,Age 4,SibRegLogPower,Top-ranked all years
+Columbia River,Wenatchee,Age 5,SibRegKalman,Top-ranked all years
+Columbia River,Okanagan,Age 3,Naive8,Top-ranked all years
+Columbia River,Okanagan,Age 4,SibRegLogPower,Top-ranked all years
+Columbia River,Okanagan,Age 5,SibRegKalman,Top-ranked all years
