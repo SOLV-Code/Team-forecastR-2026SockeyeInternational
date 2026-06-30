@@ -1,0 +1,10 @@
+System,Stock,Age,ModelLabel,Notes
+Columbia River,Bonneville Lock & Dam,Age 3,Naive8,Basic
+Columbia River,Bonneville Lock & Dam,Age 4,SibRegSimple,Based on 2025 experience
+Columbia River,Bonneville Lock & Dam,Age 5,SibRegSimple,Based on 2025 experience
+Columbia River,Wenatchee,Age 3,Naive8,Basic
+Columbia River,Wenatchee,Age 4,SibRegLogPower,Based on retrospective plot
+Columbia River,Wenatchee,Age 5,SibRegLogPower,Based on retrospective plot
+Columbia River,Okanagan,Age 3,Naive8,Basic
+Columbia River,Okanagan,Age 4,SibRegSimple,Based on 2025 experience
+Columbia River,Okanagan,Age 5,SibRegSimple,Based on 2025 experience
