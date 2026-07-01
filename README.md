@@ -71,7 +71,33 @@ Columbia River|		Wenatchee|		42784|		43716|		57100|		201619|		70789|		53657
 
 
 ### Bristol Bay
-Apply same set of short-listed model types as in 2025, plus test the spawner-recruit models being developed for the next *forecastR* upgrade.
+
+Apply same set of short-listed model types as in 2025, but revisit model selection considerations in light of 2025 performance of alternative models. Spawner-recruit models are being developed for the next *forecastR* upgrade, but not yet fully operational for testing in the model ranking step.
+
+*Alagnak*
+
+Age  |  Observations | Model Selection
+-- | -- | --
+Age 3 | top-ranked models are all variations of time series, biggest difference is whether Box-Cox transformation is applied (FC without Box-Cox is 5-10 time larger). |  Time Series Arima NoBC, because (1) same model as Age 4 and (2) underpredicted Alagnak in 2025.
+Age 4|  top-ranked models are Naive4 or time series without Box-Cox. ArimaNoBC and Naive4 give similar FC for all years, but ExpSmoothNoBC gives much lower forecasts | Time Series Arima NoBC, because (1) top-ranked, (2) supported by Naive4, and (3) underpredicted  Alagnak in 2025.
+Age 5 | Clearly top-ranked model for all years is SibReg Kalman (with time-varying slope parameter). 2nd and 3rd ranks switch between TimeSeriesExpSmoothNoBC and Naive8, depending on the year. | SibRegKalman, because (1) top-ranked this year, (2) also selected last year, and (3)  most years gives a larger forecast, and our 2025 Alagnak forecast was well under observed
+Age 6 | Clearly top-ranked model for all years is SibReg Simple. SibRegSimple forecast is higher or lower than the other top-ranked models, depending on the year. For 2026, it is higher. | SibRegSimple, because (1) top-ranked, and (2) higher 2026  FC than the other top-ranked models and underpredicted 2025.
+
+
+*Egegik*
+
+Age  |  Observations | Model Selection
+-- | -- | --
+Age 3 | Naive4 is top-ranked across most years | Naive4 because top-ranked and used last year
+Age 4|  SibReg Kalman is clearly top-ranked across most years | SibReg Kalman because (1) top-ranked and gives larger fFC for most years incl 2026 (but much lower 2025 FC, which was an underpredicted last year with the same model)
+Age 5 |  SibReg LogPower is top or 2nd ranked across years. All the alternative models give fairly similar forecasts.  | SibReg LogPower  because ranks highly (better than other SibReg, last year picked SibReg Kalmn and underpredicted quite a bit)
+Age 6 |  Different top models for each year.  | SibRegLogPower has the largest FC for 2026 (it underpredicted last year, but trying it again) 
+
+
+
+
+
+
 
 
 

@@ -1,11 +1,11 @@
 System,Stock,Age,ModelLabel,Notes
-Bristol Bay,Alagnak,Age 3,TimeSeriesArimaNoBC,Same model as Age 4 and ranked near top
-Bristol Bay,Alagnak,Age 4,TimeSeriesArimaNoBC,top-ranked and similar FC to Naive4 and larger FC (underpredicted  Alagnak in 2025)
+Bristol Bay,Alagnak,Age 3,TimeSeriesExpSmoothBC,Top-ranked all years
+Bristol Bay,Alagnak,Age 4,SibRegSimple,Top-ranked all years
 Bristol Bay,Alagnak,Age 5,SibRegKalman,Top-ranked all years
 Bristol Bay,Alagnak,Age 6,SibRegSimple,Top-ranked for 2024-2025
 Bristol Bay,Egegik,Age 3,Naive4,Top-ranked for some of the years
 Bristol Bay,Egegik,Age 4,SibRegKalman,Top-ranked all years
-Bristol Bay,Egegik,Age 5,SibRegLogPower,Sibling regr rank higher the time series in 5 of 6 years. SibRegKalman  is top-ranked in 4 of 6 years.
+Bristol Bay,Egegik,Age 5,SibRegKalman,Sibling regr rank higher the time series in 5 of 6 years. SibRegKalman  is top-ranked in 4 of 6 years.
 Bristol Bay,Egegik,Age 6,SibRegLogPower,Only one that is in top 3 for all 6 years. Top-ranked for 2024 and 2025.
 Bristol Bay,Igushik,Age 3,Naive4,Simplest of the 3 top-ranked models from different years
 Bristol Bay,Igushik,Age 4,TimeSeriesArimaBC,Top-ranked all years
@@ -30,3 +30,21 @@ Bristol Bay,Ugashik,Age 6,TimeSeriesExpSmoothNoBC,Top-ranked all years
 Bristol Bay,Wood,Age 3,Naive4,Simplest of the alternative top-ranked models
 Bristol Bay,Wood,Age 4,SibRegKalman,Top-ranked all years
 Bristol Bay,Wood,Age 5,SibRegLogPower,Top-ranked all years
+Columbia River,Bonneville Lock & Dam,Age 3,Naive8,Top-ranked all years
+Columbia River,Bonneville Lock & Dam,Age 4,SibRegLogPower,Top-ranked all years
+Columbia River,Bonneville Lock & Dam,Age 5,SibRegKalman,Top-ranked all years
+Fraser River,Chilko,Age 3,Naive4,Simplest of the alternative top-ranked models
+Fraser River,Chilko,Age 4,SibRegLogPower,Top-ranked all years
+Fraser River,Chilko,Age 5,SibRegKalman,Top-ranked all years
+Fraser River,Late Stuart,Age 3,TimeSeriesExpSmoothBC,Top-ranked all years
+Fraser River,Late Stuart,Age 4,SibRegSimple,Top-ranked all years
+Fraser River,Late Stuart,Age 5,SibRegSimple,Top-ranked all years
+Fraser River,Quesnel,Age 3,TimeSeriesArimaBC,Top-ranked all years
+Fraser River,Quesnel,Age 4,SibRegLogPower,Top-ranked all years
+Fraser River,Quesnel,Age 5,SibRegSimple,Top-ranked all years
+Fraser River,Raft,Age 3,Naive4,"Only a few fish, go with a simple model"
+Fraser River,Raft,Age 4,SibRegSimple,Top-ranked all years
+Fraser River,Raft,Age 5,Naive4,Top-ranked all years
+Fraser River,Stellako,Age 3,TimeSeriesArimaBC,Top-ranked all years
+Fraser River,Stellako,Age 4,SibRegSimple,Top-ranked all years
+Fraser River,Stellako,Age 5,Naive4,Top-ranked all years

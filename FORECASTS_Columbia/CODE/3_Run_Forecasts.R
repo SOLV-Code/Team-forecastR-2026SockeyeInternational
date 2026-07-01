@@ -252,7 +252,13 @@ library(tidyverse)
 if(!dir.exists("FORECASTS_BristolBay/OUTPUT/Retrospective_Diagnostics")){dir.create("FORECASTS_BristolBay/OUTPUT/Retrospective_Diagnostics")}
 
 
-png(filename = "FORECASTS_BristolBay/OUTPUT/Retrospective_Diagnostics/AllStocks_Obs_vs_FC.PNG",
+
+for(set.do in c("1to4","5to8")){
+
+if(set.do == "1to4"){stk.vec <- 1:4}
+if(set.do == "5to8"){stk.vec <- 5:8}
+
+png(filename = paste0("FORECASTS_BristolBay/OUTPUT/Retrospective_Diagnostics/Stocks",set.do,"_Obs_vs_FC.PNG"),
     width = 480*9, height = 480*7, units = "px",
     pointsize = 14*4.7,
     bg = "white",  res = NA)
@@ -264,14 +270,14 @@ par(mfrow = c(2,2),
 
 
 
-for(stk.do in stk.list.all){
+for(stk.do in stk.list.all[stk.vec]){
 
 
 system.label <-  stk.lookup %>% dplyr::filter(River == stk.do)  %>% select(System) %>% unlist()
 
 
 
-obs.ret.stk <-   columbia.src %>% dplyr::filter(River == stk.do, ReturnYear >=2010) %>%
+obs.ret.stk <-   BristolBay.src %>% dplyr::filter(River == stk.do, ReturnYear >=2010) %>%
                   select(ReturnYear, Total_Returns) %>% unique()
 
 fc.stk <- fc.SumOfMedians %>% dplyr::filter(Stock == stk.do) %>%
@@ -312,16 +318,15 @@ lines(fc.stk$ReturnYear,fc.stk$SumOfMedians/scalar.use,type="o",
 
 } # end looping through stocks
 
-plot(1:5,1:5, type="n",axes=FALSE,xlab="",ylab="")
 
-  legend("topleft",legend = c("Observed","Point Forecast","Median of Interval"),
+  legend(par("usr")[1]-4,par("usr")[4]*1.2,legend = c("Observed","Point Forecast","Median of Interval"),
          pch=21, col=c("darkblue","red","red"),
          pt.bg=c("lightblue","white", "darkorange"),
-         pt.cex=c(3,2,2),bty="n",cex=2)
+         pt.cex=c(1.3,1,1),bty="n",cex=1.1,xpd=NA)
 
 
 
 dev.off()
 
-
+} # end looping through sets
 
