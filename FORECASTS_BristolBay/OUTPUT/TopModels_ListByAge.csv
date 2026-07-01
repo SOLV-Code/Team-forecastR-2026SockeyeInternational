@@ -1,13 +1,40 @@
 System,Stock,Age,NumModels,ModelLabel
-Columbia River,Bonneville Lock & Dam,Age 3,1,Naive8
-Columbia River,Bonneville Lock & Dam,Age 4,2,SibRegLogPower SibRegKalman
-Columbia River,Bonneville Lock & Dam,Age 5,1,SibRegKalman
-Columbia River,Bonneville Lock & Dam,Total,2,SibRegLogPower SibRegKalman
-Columbia River,Okanagan,Age 3,5,SibRegSimple SibRegLogPower SibRegKalman TimeSeriesArimaBC Naive4
-Columbia River,Okanagan,Age 4,2,SibRegKalman SibRegLogPower
-Columbia River,Okanagan,Age 5,2,SibRegSimple SibRegLogPower
-Columbia River,Okanagan,Total,2,SibRegKalman SibRegLogPower
-Columbia River,Wenatchee,Age 3,2,TimeSeriesArimaNoBC TimeSeriesArimaBC
-Columbia River,Wenatchee,Age 4,4,Naive8 SibRegKalman TimeSeriesExpSmoothBC SibRegLogPower
-Columbia River,Wenatchee,Age 5,1,SibRegSimple
-Columbia River,Wenatchee,Total,4,Naive8 TimeSeriesExpSmoothNoBC TimeSeriesExpSmoothBC SibRegLogPower
+Bristol Bay,Alagnak,Age 3,1,TimeSeriesExpSmoothBC
+Bristol Bay,Alagnak,Age 4,3,TimeSeriesArimaNoBC TimeSeriesExpSmoothNoBC Naive4
+Bristol Bay,Alagnak,Age 5,1,SibRegKalman
+Bristol Bay,Alagnak,Age 6,1,SibRegSimple
+Bristol Bay,Alagnak,Total,1,SibRegKalman
+Bristol Bay,Egegik,Age 3,5,Naive4 TimeSeriesExpSmoothBC SibRegSimple SibRegLogPower SibRegKalman
+Bristol Bay,Egegik,Age 4,1,SibRegKalman
+Bristol Bay,Egegik,Age 5,2,TimeSeriesExpSmoothNoBC SibRegLogPower
+Bristol Bay,Egegik,Age 6,2,SibRegKalman Naive4
+Bristol Bay,Egegik,Total,2,Naive4 TimeSeriesArimaBC
+Bristol Bay,Igushik,Age 3,2,Naive4 TimeSeriesArimaBC
+Bristol Bay,Igushik,Age 4,1,TimeSeriesArimaBC
+Bristol Bay,Igushik,Age 5,2,SibRegLogPower SibRegKalman
+Bristol Bay,Igushik,Age 6,4,TimeSeriesExpSmoothBC TimeSeriesArimaNoBC Naive4 Naive8
+Bristol Bay,Igushik,Total,2,SibRegLogPower SibRegKalman
+Bristol Bay,Kvichak,Age 3,1,TimeSeriesExpSmoothBC
+Bristol Bay,Kvichak,Age 4,1,SibRegLogPower
+Bristol Bay,Kvichak,Age 5,1,TimeSeriesArimaBC
+Bristol Bay,Kvichak,Age 6,1,SibRegSimple
+Bristol Bay,Kvichak,Total,1,Naive4
+Bristol Bay,Naknek,Age 3,1,Naive8
+Bristol Bay,Naknek,Age 4,5,TimeSeriesArimaBC Naive4 TimeSeriesArimaNoBC Naive8 SibRegKalman
+Bristol Bay,Naknek,Age 5,1,SibRegLogPower
+Bristol Bay,Naknek,Age 6,1,Naive4
+Bristol Bay,Naknek,Total,1,SibRegLogPower
+Bristol Bay,Nushagak,Age 3,1,Naive4
+Bristol Bay,Nushagak,Age 4,1,Naive4
+Bristol Bay,Nushagak,Age 5,4,TimeSeriesArimaNoBC TimeSeriesExpSmoothNoBC Naive4 SibRegLogPower
+Bristol Bay,Nushagak,Age 6,2,TimeSeriesExpSmoothNoBC SibRegKalman
+Bristol Bay,Nushagak,Total,2,TimeSeriesArimaNoBC Naive4
+Bristol Bay,Ugashik,Age 3,4,Naive8 SibRegSimple SibRegLogPower SibRegKalman
+Bristol Bay,Ugashik,Age 4,3,TimeSeriesArimaNoBC Naive8 TimeSeriesExpSmoothNoBC
+Bristol Bay,Ugashik,Age 5,3,TimeSeriesExpSmoothNoBC Naive8 SibRegKalman
+Bristol Bay,Ugashik,Age 6,1,TimeSeriesExpSmoothNoBC
+Bristol Bay,Ugashik,Total,1,Naive4
+Bristol Bay,Wood,Age 3,3,Naive8 TimeSeriesExpSmoothNoBC TimeSeriesExpSmoothBC
+Bristol Bay,Wood,Age 4,3,TimeSeriesExpSmoothBC Naive4 TimeSeriesExpSmoothNoBC
+Bristol Bay,Wood,Age 5,2,SibRegLogPower Naive4
+Bristol Bay,Wood,Total,3,SibRegKalman TimeSeriesExpSmoothBC Naive4

@@ -1,10 +1,32 @@
 System,Stock,Age,ModelLabel,Notes
-Columbia River,Bonneville Lock & Dam,Age 3,Naive8,Basic
-Columbia River,Bonneville Lock & Dam,Age 4,SibRegSimple,Based on 2025 experience
-Columbia River,Bonneville Lock & Dam,Age 5,SibRegSimple,Based on 2025 experience
-Columbia River,Wenatchee,Age 3,Naive8,Basic
-Columbia River,Wenatchee,Age 4,SibRegLogPower,Based on retrospective plot
-Columbia River,Wenatchee,Age 5,SibRegLogPower,Based on retrospective plot
-Columbia River,Okanagan,Age 3,Naive8,Basic
-Columbia River,Okanagan,Age 4,SibRegSimple,Based on 2025 experience
-Columbia River,Okanagan,Age 5,SibRegSimple,Based on 2025 experience
+Bristol Bay,Alagnak,Age 3,TimeSeriesExpSmoothBC,Top-ranked all years
+Bristol Bay,Alagnak,Age 4,SibRegSimple,Top-ranked all years
+Bristol Bay,Alagnak,Age 5,SibRegKalman,Top-ranked all years
+Bristol Bay,Alagnak,Age 6,SibRegSimple,Top-ranked for 2024-2025
+Bristol Bay,Egegik,Age 3,Naive4,Top-ranked for some of the years
+Bristol Bay,Egegik,Age 4,SibRegKalman,Top-ranked all years
+Bristol Bay,Egegik,Age 5,SibRegKalman,Sibling regr rank higher the time series in 5 of 6 years. SibRegKalman  is top-ranked in 4 of 6 years.
+Bristol Bay,Egegik,Age 6,SibRegLogPower,Only one that is in top 3 for all 6 years. Top-ranked for 2024 and 2025.
+Bristol Bay,Igushik,Age 3,Naive4,Simplest of the 3 top-ranked models from different years
+Bristol Bay,Igushik,Age 4,TimeSeriesArimaBC,Top-ranked all years
+Bristol Bay,Igushik,Age 5,SibRegKalman,Top-ranked all years
+Bristol Bay,Igushik,Age 6,Naive8,Simpler of the 2 top-ranked models from different years
+Bristol Bay,Kvichak,Age 3,TimeSeriesExpSmoothBC,Top-ranked all years
+Bristol Bay,Kvichak,Age 4,SibRegLogPower,Top-ranked all years
+Bristol Bay,Kvichak,Age 5,TimeSeriesArimaBC,Top-ranked all years
+Bristol Bay,Kvichak,Age 6,SibRegSimple,Top-ranked all years
+Bristol Bay,Naknek,Age 3,Naive8,Simplest of the alternative top-ranked models
+Bristol Bay,Naknek,Age 4,TimeSeriesArimaNoBC,Most often top-ranked
+Bristol Bay,Naknek,Age 5,SibRegLogPower,Top-ranked all years
+Bristol Bay,Naknek,Age 6,Naive4,Top-ranked all years
+Bristol Bay,Nushagak,Age 3,Naive4,Top-ranked all years
+Bristol Bay,Nushagak,Age 4,Naive4,Top-ranked in 5 of the 6 years
+Bristol Bay,Nushagak,Age 5,Naive4,Top-ranked for 2023-2025 and in top 3 for 2020-2022.
+Bristol Bay,Nushagak,Age 6,TimeSeriesExpSmoothNoBC,Top-ranked all years
+Bristol Bay,Ugashik,Age 3,Naive8,Top-ranked all years
+Bristol Bay,Ugashik,Age 4,Naive8,Most often in top 3
+Bristol Bay,Ugashik,Age 5,TimeSeriesExpSmoothNoBC,Most often top-ranked
+Bristol Bay,Ugashik,Age 6,TimeSeriesExpSmoothNoBC,Top-ranked all years
+Bristol Bay,Wood,Age 3,Naive4,Simplest of the alternative top-ranked models
+Bristol Bay,Wood,Age 4,SibRegKalman,Top-ranked all years
+Bristol Bay,Wood,Age 5,SibRegLogPower,Top-ranked all years

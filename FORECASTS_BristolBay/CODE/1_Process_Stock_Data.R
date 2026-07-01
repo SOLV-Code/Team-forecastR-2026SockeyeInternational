@@ -219,41 +219,30 @@ for(stk.do in stk.list.all){
 
 
 
-##########################################################
-# REST NOT YET UPDATED
-############################################################
-
-if(FALSE){
-
-
-
 #####################################################################
 # AGE COMP DIAGNOSTIC PLOTS
 #####################################################################
 
-#full.data.long.df
+#
 #age.lookup
 
-if(!dir.exists("OUTPUT/1_Exploratory_Data_Analyses")){dir.create("OUTPUT/1_Exploratory_Data_Analyses")}
+if(!dir.exists("FORECASTS_BristolBay/OUTPUT/1_Exploratory_Data_Analyses")){dir.create("FORECASTS_BristolBay/OUTPUT/1_Exploratory_Data_Analyses")}
 
-brd.yrs.range <- range(full.data.long.df$BroodYear)
+brd.yrs.range <- range(BristolBay.src$BroodYear)
 brd.yrs.range
 
 system.list <- sort(unique(age.lookup$System))
 system.list
 
+fig.do <- "Bristol Bay"
+system.sub.list <- "Bristol Bay"
 
-for(fig.do in c("BristolBay","Other")){
-
-
-if(fig.do == "BristolBay"){system.sub.list <- "Bristol Bay"}
-if(fig.do == "Other"){system.sub.list <- system.list[system.list!="Bristol Bay"]}
 
   print("---------------------")
   print(paste("start : ",fig.do))
 
 
-png(filename = paste0("OUTPUT/1_Exploratory_Data_Analyses/Diagnostics_AgeComp_",
+png(filename = paste0("FORECASTS_BristolBay/OUTPUT/1_Exploratory_Data_Analyses/Diagnostics_AgeComp_",
                         fig.do, ".png"),
       width = 480*6, height = 480*8, units = "px",
       pointsize = 14*4.5,
@@ -310,7 +299,7 @@ for(i in 2:1){
 cohort.plot <- age.lookup.sub$Label[i]
 bg.use <- c("darkblue","white")[i]
 
-data.plot <- full.data.long.df  %>% dplyr::filter(River == stk.do,Label == cohort.plot)
+data.plot <- BristolBay.src  %>% dplyr::filter(River == stk.do,Label == cohort.plot)
 
 lines(data.plot$BroodYear,
       data.plot$PercOfBrdYr,
@@ -325,7 +314,7 @@ legend(year.lims[1],115,legend = paste0(age.lookup.sub$Euro[1:2]," (",age.lookup
 
 dev.off()
 
-} # end looping through figures
+
 
 
 
@@ -335,10 +324,11 @@ dev.off()
 # RETURNS BY AGE DIAGNOSTIC PLOTS - Full Panels
 #####################################################################
 
-#full.data.long.df
+#
 #age.lookup
 
-if(!dir.exists("OUTPUT/1_Exploratory_Data_Analyses/ReturnsByAge")){dir.create("OUTPUT/1_Exploratory_Data_Analyses/ReturnsByAge")}
+if(!dir.exists("FORECASTS_BristolBay/OUTPUT/1_Exploratory_Data_Analyses/ReturnsByAge")){
+      dir.create("FORECASTS_BristolBay/OUTPUT/1_Exploratory_Data_Analyses/ReturnsByAge")}
 
 
 
@@ -350,7 +340,7 @@ for(stk.do in stk.list.all){
 
   system.label <- stk.lookup %>% dplyr::filter(River == stk.do) %>% select(System) %>% unique()
 
-  png(filename = paste0("OUTPUT/1_Exploratory_Data_Analyses/ReturnsByAge/Diagnostics_ReturnsByAge_",
+  png(filename = paste0("FORECASTS_BristolBay/OUTPUT/1_Exploratory_Data_Analyses/ReturnsByAge/Diagnostics_ReturnsByAge_",
                         system.label,"_",stk.do, ".png"),
       width = 480*5, height = 480*4, units = "px",
       pointsize = 14*3.3,
@@ -426,7 +416,7 @@ dev.off()
 # SIBLING REGRESSION PRE-SCREEN
 #####################################################################
 
-if(!dir.exists("OUTPUT/1_Exploratory_Data_Analyses/SibRegPreScreen")){dir.create("OUTPUT/1_Exploratory_Data_Analyses/SibRegPreScreen")}
+if(!dir.exists("FORECASTS_BristolBay/OUTPUT/1_Exploratory_Data_Analyses/SibRegPreScreen")){dir.create("FORECASTS_BristolBay/OUTPUT/1_Exploratory_Data_Analyses/SibRegPreScreen")}
 
 
 
@@ -437,7 +427,7 @@ for(stk.do in stk.list.all){
 
   system.label <- stk.lookup %>% dplyr::filter(River == stk.do) %>% select(System) %>% unique()
 
-  png(filename = paste0("OUTPUT/1_Exploratory_Data_Analyses/SibRegPreScreen/Diagnostics_SibRegPreScreen_",
+  png(filename = paste0("FORECASTS_BristolBay/OUTPUT/1_Exploratory_Data_Analyses/SibRegPreScreen/Diagnostics_SibRegPreScreen_",
                         system.label,"_",stk.do, ".png"),
       width = 480*5, height = 480*4, units = "px",
       pointsize = 14*3.3,
@@ -579,7 +569,7 @@ for(stk.do in stk.list.all){
 
   system.label <- stk.lookup %>% dplyr::filter(River == stk.do) %>% select(System) %>% unique()
 
-  png(filename = paste0("OUTPUT/1_Exploratory_Data_Analyses/SibRegPreScreen/Diagnostics_SibRegPreScreen_",
+  png(filename = paste0("FORECASTS_BristolBay/OUTPUT/1_Exploratory_Data_Analyses/SibRegPreScreen/Diagnostics_SibRegPreScreen_",
                         system.label,"_",stk.do, "_trimmed2000.png"),
       width = 480*5, height = 480*4, units = "px",
       pointsize = 14*3.3,
@@ -708,7 +698,6 @@ for(stk.do in stk.list.all){
 
 } # end looping through stocks
 
-}
 
 
 
