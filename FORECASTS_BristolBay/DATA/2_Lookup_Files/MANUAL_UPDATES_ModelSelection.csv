@@ -3,16 +3,16 @@ Bristol Bay,Alagnak,Age 3,TimeSeriesArimaNoBC,Same model as Age 4 and ranked nea
 Bristol Bay,Alagnak,Age 4,TimeSeriesArimaNoBC,top-ranked and similar FC to Naive4 and larger FC (underpredicted  Alagnak in 2025)
 Bristol Bay,Alagnak,Age 5,SibRegKalman,Top-ranked all years
 Bristol Bay,Alagnak,Age 6,SibRegSimple,Top-ranked for 2024-2025
-Bristol Bay,Egegik,Age 3,Naive4,Top-ranked for some of the years
-Bristol Bay,Egegik,Age 4,SibRegKalman,Top-ranked all years
-Bristol Bay,Egegik,Age 5,SibRegLogPower,Sibling regr rank higher the time series in 5 of 6 years. SibRegKalman  is top-ranked in 4 of 6 years.
-Bristol Bay,Egegik,Age 6,SibRegLogPower,Only one that is in top 3 for all 6 years. Top-ranked for 2024 and 2025.
-Bristol Bay,Igushik,Age 3,Naive4,Simplest of the 3 top-ranked models from different years
-Bristol Bay,Igushik,Age 4,TimeSeriesArimaBC,Top-ranked all years
-Bristol Bay,Igushik,Age 5,SibRegKalman,Top-ranked all years
-Bristol Bay,Igushik,Age 6,Naive8,Simpler of the 2 top-ranked models from different years
+Bristol Bay,Egegik,Age 3,Naive4,Top-ranked for most years and used last year
+Bristol Bay,Egegik,Age 4,SibRegKalman,Clearly top-ranked across most years
+Bristol Bay,Egegik,Age 5,SibRegLogPower,Top or 2nd ranked across yearsand does better than other SibReg which underpredicted 2025
+Bristol Bay,Egegik,Age 6,SibRegLogPower,Different top-models each year but LogPower sib reg has largest 2026 FC after underpredicting 2025.
+Bristol Bay,Igushik,Age 3,Naive4,Simplest of the highly-ranked models and same model as selected last year
+Bristol Bay,Igushik,Age 4,TimeSeriesArimaBC,Clearly top-ranked and same model as selected last year
+Bristol Bay,Igushik,Age 5,SibRegKalman,Top-ranked in recent years and same as selected last year.
+Bristol Bay,Igushik,Age 6,Naive4,Naive4 because top-ranked in recent years (Last year used Naive8)
 Bristol Bay,Kvichak,Age 3,TimeSeriesExpSmoothBC,Top-ranked all years
-Bristol Bay,Kvichak,Age 4,SibRegLogPower,Top-ranked all years
+Bristol Bay,Kvichak,Age 4,SibRegKalman,Top-ranked all years
 Bristol Bay,Kvichak,Age 5,TimeSeriesArimaBC,Top-ranked all years
 Bristol Bay,Kvichak,Age 6,SibRegSimple,Top-ranked all years
 Bristol Bay,Naknek,Age 3,Naive8,Simplest of the alternative top-ranked models
