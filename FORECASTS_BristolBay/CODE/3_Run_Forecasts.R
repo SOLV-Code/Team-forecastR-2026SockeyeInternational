@@ -5,26 +5,96 @@
 
 # install/load required packages
 
-library(devtools) # Load the devtools package.
-
-# current official version
-pak::pak("SalmonForecastR/ForecastR-Package")
-
-# current dev version
-# pak::pak("SOLV-Code/ForecastRDEV-Package")
-
+#library(devtools) # Load the devtools package.
+#install_github("SOLV-Code/forecastR_package")
 
 library(forecastR)
 
 library(tidyverse)
 
 
+################################################################################
+# WORKED EXAMPLES ILLUSTRATING KEY FUNCTIONS
+################################################################################
+
 # For details, check this wiki page from the releases repo:
 # https://github.com/SalmonForecastR/ForecastR-Releases/wiki/4-Using-the-ForecastR-package
 
 
+#  load and prepare a sample input file
+
+
+data.raw <- read.csv("FORECASTS_Columbia/DATA/3_ProcessedData/ForecastR_InputFiles/ForecastR_Input_Bonneville Lock & Dam_ForecastYear2025.csv")
+
+data.prepped <- prepData(data.raw ,out.labels="v2") # this pre-processes the inut file
+names(data.prepped)
+
+# check the components
+data.prepped$data$`Age 4`
+data.prepped$data$`Age 5`
+data.prepped$output.pre
+data.prepped$specs
+data.prepped$sibreg.in
+
+# fit a candidate model, plot the model fit, and calculate the 2025 forecast for the model
+
+sample.fit.arima <- fitModel(model= "TimeSeriesArima", data = data.prepped$data, settings =
+                                list(BoxCox=FALSE),tracing=TRUE)
+
+plotModelFit(sample.fit.arima,
+             options = list(plot.which = "resid_ts", age.which = "Age 4", plot.add = FALSE))
+
+
+sample.fc.out <- calcFC(fit.obj= sample.fit.arima,data = data.prepped$data, fc.yr= 2025,
+                   		 settings = list(BoxCox=FALSE), tracing=TRUE)	# IMPORTANT THAT SETTINGS ARE THE SAME!
+
+print(sample.fc.out)
+
+# run multiple candidate models and rank them based on retrospective performance
+# multiFC() 	apply fitModel() and calcFC() using a list of alternative models
+# NOTE: multiFC usesd the raw data (calls prepData fn inside)
+# rankModels() 	do model ranking using the output of multiFC()
+
+
+
+settings.use <- list( 			Naive4 = list(model.type="Naive",settings=list(avg.yrs=4)),
+                     				Naive8 = list(model.type="Naive",settings=list(avg.yrs=8)),
+                     				SibRegSimple = list(model.type="SibRegSimple",settings=NULL),
+                     				SibRegLogPower =  list(model.type="SibRegLogPower",settings=NULL),
+                     				SibRegKalman =  list(model.type="SibRegKalman",settings=NULL),
+                     				TimeSeriesArimaBC = list(model.type="TimeSeriesArima",settings=list(BoxCox=TRUE)),
+                     				TimeSeriesArimaNoBC = list(model.type="TimeSeriesArima",settings=list(BoxCox=FALSE)),
+                     				TimeSeriesExpSmoothBC = list(model.type="TimeSeriesExpSmooth",settings=list(BoxCox=TRUE)),
+                     				TimeSeriesExpSmoothNoBC = list(model.type="TimeSeriesExpSmooth",settings=list(BoxCox=FALSE))
+                     				)
+
+multiresults.retro <- multiFC(data.file=data.raw,
+                              settings.list=settings.use,
+                            	do.retro=TRUE,
+                            	retro.min.yrs=15,
+                              out.type="short",
+                              int.type = "Retrospective", # generate forecast intervals based on retrospective residuals
+                              int.n = 500,
+                              boot.type = "meboot",
+                              tracing=FALSE)
+
+names(multiresults.retro)
+
+# check the output
+multiresults.retro$table.ptfc
+multiresults.retro$retro.pm$retro.pm.bal[,,'Age 4']
+
+# do the ranking
+ranking.pm.use <- c("MRE", "MAE", "MPE", "MAPE", "MASE", "RMSE")
+
+ranking.out <- rankModels(dat = multiresults.retro$retro.pm$retro.pm.bal,
+                          columnToRank=ranking.pm.use, relative.bol=TRUE) # TRUE means scaled ranking
+ranking.out$bestmodel
+ranking.out$`Age 4`
+
+
 ################################################################################
-# APPLY FULL SET OF 9 CANDIDATE MODELS TO ALL BRISTOL BAY STOCKS FOR FC YEARS 2021-2026
+# APPLY FULL SET OF 9 CANDIDATE MODELS TO ALL 3 COLUMBIA STOCKS FOR FC YEARS 2021-2026
 
 # TO DO
 # - loop through full data set vs. trimmed ~ 2000
@@ -33,15 +103,15 @@ library(tidyverse)
 start.time <-  proc.time()
 
 # get a list of all alternative input files
-files.list <- list.files("FORECASTS_BristolBay/DATA/3_ProcessedData/ForecastR_InputFiles")
+files.list <- list.files("FORECASTS_Columbia/DATA/3_ProcessedData/ForecastR_InputFiles")
 files.list
 
-files.paths <- list.files("FORECASTS_BristolBay/DATA/3_ProcessedData/ForecastR_InputFiles",full.names = TRUE)
+files.paths <- list.files("FORECASTS_Columbia/DATA/3_ProcessedData/ForecastR_InputFiles",full.names = TRUE)
 files.paths
 
 # if want to keep a log for debugging, change to TRUE
 do.log <- FALSE
-if(do.log){sink("FORECASTS_BristolBay/OUTPUT/ModelFitting_Log.txt")} # open the log file
+if(do.log){sink("FORECASTS_Columbia/OUTPUT/ModelFitting_Log.txt")} # open the log file
 
 
 if(exists("results.store")){rm(results.store)}
@@ -148,7 +218,7 @@ proc.time() - start.time
 results.store <- results.store %>% left_join(stk.lookup%>% dplyr::rename(Stock=River),by="Stock") %>% select(Stock,everything())
 
 write_csv(results.store %>%  mutate(across(c(PointFC,starts_with("p")),\(x) round(x, 0))),
-          "FORECASTS_BristolBay/OUTPUT/FullOutputs_ForecastsAndRanks.csv")
+          "FORECASTS_Columbia/OUTPUT/FullOutputs_ForecastsAndRanks.csv")
 
 
 
@@ -158,7 +228,7 @@ results.top1 <- results.store %>% group_by(Stock,Age,FC_Year) %>% slice_min(AvgR
         mutate(across(c(PointFC,starts_with("p")),\(x) round(x, 0)))
 
 
-write_csv(results.top1,"FORECASTS_BristolBay/OUTPUT/Top1_ForecastsAndRanks.csv")
+write_csv(results.top1,"FORECASTS_Columbia/OUTPUT/Top1_ForecastsAndRanks.csv")
 
 
 
@@ -167,7 +237,7 @@ results.top3 <- results.store %>% group_by(Stock,Age,FC_Year) %>% slice_min(AvgR
   arrange(System,Stock,Age,FC_Year,AvgRankByAge) %>% select(System,Stock,Age,FC_Year,AvgRankByAge,ModelLabel,everything()) %>%
   mutate(across(c(PointFC,starts_with("p")),\(x) round(x, 0)))
 
-write_csv(results.top3,"FORECASTS_BristolBay/OUTPUT/Top3_ForecastsAndRanks.csv")
+write_csv(results.top3,"FORECASTS_Columbia/OUTPUT/Top3_ForecastsAndRanks.csv")
 
 
 
@@ -177,11 +247,7 @@ results.topmodels.byage <- results.top1 %>% ungroup() %>% group_by(System,Stock,
       by=c("System","Stock","Age")
 )
 
-write_csv(results.topmodels.byage ,"FORECASTS_BristolBay/OUTPUT/TopModels_ListByAge.csv")
-
-
-
-
+write_csv(results.topmodels.byage ,"FORECASTS_Columbia/OUTPUT/TopModels_ListByAge.csv")
 
 
 ###########################################################
@@ -190,7 +256,7 @@ write_csv(results.topmodels.byage ,"FORECASTS_BristolBay/OUTPUT/TopModels_ListBy
 # Details in Step 7 from the 2025 Notes: https://github.com/SOLV-Code/Team-forecastR-2025SockeyeInternational/tree/main/NOTES/7_Select_2025FC
 # Additional 2026 notes in the file
 
-selected.models <- read_csv("FORECASTS_BristolBay/DATA/2_Lookup_Files/MANUAL_UPDATES_ModelSelection.csv")
+selected.models <- read_csv("FORECASTS_Columbia/DATA/2_Lookup_Files/MANUAL_UPDATES_ModelSelection.csv")
 selected.models
 
 
@@ -201,7 +267,7 @@ selection.table.src <- selected.models %>% mutate(Selection = paste0(ModelLabel,
   pivot_wider(id_cols = c(System, Stock),names_from = Age, values_from = Selection)
 
 
-write_csv(selection.table.src ,"FORECASTS_BristolBay/OUTPUT/ModelSelection_Table.csv")
+write_csv(selection.table.src ,"FORECASTS_Columbia/OUTPUT/ModelSelection_Table.csv")
 
 
 # extract corresponding forecasts
@@ -220,19 +286,19 @@ fc.details <- bind_rows(selected.models   %>% mutate(FC_Year = 2021),
 fc.details <- fc.details  %>% left_join(results.store,
                         by=c("System","Stock","Age","FC_Year","ModelLabel") )
 
-write_csv(fc.details ,"FORECASTS_BristolBay/OUTPUT/Forecast_Details.csv")
+write_csv(fc.details ,"FORECASTS_Columbia/OUTPUT/Forecast_Details.csv")
 
 
 fc.SumOfMedians <- fc.details %>% group_by(System,Stock,FC_Year) %>% summarize(SumOfMedians=sum(p50)) %>%
   pivot_wider(id_cols=c(System,Stock),names_from = FC_Year,values_from = SumOfMedians)
 
-write_csv(fc.SumOfMedians ,"FORECASTS_BristolBay/OUTPUT/Forecast_Totals_ByYear_SumOfMedians.csv")
+write_csv(fc.SumOfMedians ,"FORECASTS_Columbia/OUTPUT/Forecast_Totals_ByYear_SumOfMedians.csv")
 
 
 fc.SumOfPtFC <- fc.details %>% group_by(System,Stock,FC_Year) %>% summarize(SumOfPtFC=sum(PointFC)) %>%
   pivot_wider(id_cols=c(System,Stock),names_from = FC_Year,values_from = SumOfPtFC)
 
-write_csv(fc.SumOfPtFC ,"FORECASTS_BristolBay/OUTPUT/Forecast_Totals_ByYear_SumOfPtFC.csv")
+write_csv(fc.SumOfPtFC ,"FORECASTS_Columbia/OUTPUT/Forecast_Totals_ByYear_SumOfPtFC.csv")
 
 
 
@@ -249,16 +315,10 @@ library(tidyverse)
 
 
 
-if(!dir.exists("FORECASTS_BristolBay/OUTPUT/Retrospective_Diagnostics")){dir.create("FORECASTS_BristolBay/OUTPUT/Retrospective_Diagnostics")}
+if(!dir.exists("FORECASTS_Columbia/OUTPUT/Retrospective_Diagnostics")){dir.create("FORECASTS_Columbia/OUTPUT/Retrospective_Diagnostics")}
 
 
-
-for(set.do in c("1to4","5to8")){
-
-if(set.do == "1to4"){stk.vec <- 1:4}
-if(set.do == "5to8"){stk.vec <- 5:8}
-
-png(filename = paste0("FORECASTS_BristolBay/OUTPUT/Retrospective_Diagnostics/Stocks",set.do,"_Obs_vs_FC.PNG"),
+png(filename = "FORECASTS_Columbia/OUTPUT/Retrospective_Diagnostics/AllStocks_Obs_vs_FC.PNG",
     width = 480*9, height = 480*7, units = "px",
     pointsize = 14*4.7,
     bg = "white",  res = NA)
@@ -270,14 +330,14 @@ par(mfrow = c(2,2),
 
 
 
-for(stk.do in stk.list.all[stk.vec]){
+for(stk.do in stk.list.all){
 
 
 system.label <-  stk.lookup %>% dplyr::filter(River == stk.do)  %>% select(System) %>% unlist()
 
 
 
-obs.ret.stk <-   BristolBay.src %>% dplyr::filter(River == stk.do, ReturnYear >=2010) %>%
+obs.ret.stk <-   columbia.src %>% dplyr::filter(River == stk.do, ReturnYear >=2010) %>%
                   select(ReturnYear, Total_Returns) %>% unique()
 
 fc.stk <- fc.SumOfMedians %>% dplyr::filter(Stock == stk.do) %>%
@@ -318,15 +378,16 @@ lines(fc.stk$ReturnYear,fc.stk$SumOfMedians/scalar.use,type="o",
 
 } # end looping through stocks
 
+plot(1:5,1:5, type="n",axes=FALSE,xlab="",ylab="")
 
-  legend(par("usr")[1]-4,par("usr")[4]*1.2,legend = c("Observed","Point Forecast","Median of Interval"),
+  legend("topleft",legend = c("Observed","Point Forecast","Median of Interval"),
          pch=21, col=c("darkblue","red","red"),
          pt.bg=c("lightblue","white", "darkorange"),
-         pt.cex=c(1.3,1,1),bty="n",cex=1.1,xpd=NA)
+         pt.cex=c(3,2,2),bty="n",cex=2)
 
 
 
 dev.off()
 
-} # end looping through sets
+
 

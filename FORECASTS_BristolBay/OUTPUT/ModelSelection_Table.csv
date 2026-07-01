@@ -1,0 +1,9 @@
+System,Stock,Age 3,Age 4,Age 5,Age 6
+Bristol Bay,Alagnak,TimeSeriesArimaNoBC: Same model as Age 4 and ranked near top,TimeSeriesArimaNoBC: top-ranked and similar FC to Naive4 and larger FC (underpredicted  Alagnak in 2025),SibRegKalman: Top-ranked all years,SibRegSimple: Top-ranked for 2024-2025
+Bristol Bay,Egegik,Naive4: Top-ranked for some of the years,SibRegKalman: Top-ranked all years,SibRegLogPower: Sibling regr rank higher the time series in 5 of 6 years. SibRegKalman  is top-ranked in 4 of 6 years.,SibRegLogPower: Only one that is in top 3 for all 6 years. Top-ranked for 2024 and 2025.
+Bristol Bay,Igushik,Naive4: Simplest of the 3 top-ranked models from different years,TimeSeriesArimaBC: Top-ranked all years,SibRegKalman: Top-ranked all years,Naive8: Simpler of the 2 top-ranked models from different years
+Bristol Bay,Kvichak,TimeSeriesExpSmoothBC: Top-ranked all years,SibRegLogPower: Top-ranked all years,TimeSeriesArimaBC: Top-ranked all years,SibRegSimple: Top-ranked all years
+Bristol Bay,Naknek,Naive8: Simplest of the alternative top-ranked models,TimeSeriesArimaNoBC: Most often top-ranked,SibRegLogPower: Top-ranked all years,Naive4: Top-ranked all years
+Bristol Bay,Nushagak,Naive4: Top-ranked all years,Naive4: Top-ranked in 5 of the 6 years,Naive4: Top-ranked for 2023-2025 and in top 3 for 2020-2022.,TimeSeriesExpSmoothNoBC: Top-ranked all years
+Bristol Bay,Ugashik,Naive8: Top-ranked all years,Naive8: Most often in top 3,TimeSeriesExpSmoothNoBC: Most often top-ranked,TimeSeriesExpSmoothNoBC: Top-ranked all years
+Bristol Bay,Wood,Naive4: Simplest of the alternative top-ranked models,SibRegKalman: Top-ranked all years,SibRegLogPower: Top-ranked all years,NA
