@@ -72,7 +72,7 @@ Columbia River|		Wenatchee|		42784|		43716|		57100|		201619|		70789|		53657
 
 ### Bristol Bay
 
-Apply same set of short-listed model types as in 2025, but revisit model selection considerations in light of 2025 performance of alternative models. Spawner-recruit models are being developed for the next *forecastR* upgrade, but not yet fully operational for testing in the model ranking step.
+Apply same set of short-listed model types as in 2025, but revisit model selection considerations in light of 2025 performance of alternative models. Spawner-recruit models are being developed for the next *forecastR* upgrade, but not yet fully operational for testing in the model ranking step.  The starting point for model selection is the retrospective model ranking of the 2021-2026 forecasts (each one individually including a retrospective model evaluation for up to t-1). *Note*: BC vs. NoBC in time series model labels indicates whether Box-Cox transformation was used.
 
 *Alagnak*
 
@@ -90,15 +90,74 @@ Age  |  Observations | Model Selection
 -- | -- | --
 Age 3 | Naive4 is top-ranked across most years | Naive4 because top-ranked and used last year
 Age 4|  SibReg Kalman is clearly top-ranked across most years | SibReg Kalman because (1) top-ranked and gives larger fFC for most years incl 2026 (but much lower 2025 FC, which was an underpredicted last year with the same model)
-Age 5 |  SibReg LogPower is top or 2nd ranked across years. All the alternative models give fairly similar forecasts.  | SibReg LogPower  because ranks highly (better than other SibReg, last year picked SibReg Kalmn and underpredicted quite a bit)
+Age 5 |  SibReg LogPower is top or 2nd ranked across years. All the alternative models give fairly similar forecasts.  | SibReg LogPower  because ranks highly (better than other SibReg, last year picked SibReg Kalman and underpredicted quite a bit)
 Age 6 |  Different top models for each year.  | SibRegLogPower has the largest FC for 2026 (it underpredicted last year, but trying it again) 
 
 
 
+*Igushik*
+
+Last year's forecast was the closest among available candidate models.
+
+Age  |  Observations | Model Selection
+-- | -- | --
+Age 3 | Naive4 is top-ranked or close 2nd across all years | Naive4 is the simplest of the highly-ranked models and same model as selected last year.
+Age 4 |  TimeSeries Arima BC top-ranked in all years | Clearly top-ranked and same model as selected last year
+Age 5 |  Sibling regressions top-ranked in all years (LogPower for 2021 and 2022, Kalman for 2023 to 2026) | SibReg Kalman because top-ranked in recent years and same as selected last year.
+Age 6 |  Top-ranked models are either naive or time-series models, with specific version different each year | Naive4 because top-ranked in recent years (Last year used Naive8)
 
 
+*Kvichak*
+
+Last year substantially underpredicted one of main age classes (sum of selected age-specific forecasts was much lower than the total forecasts from any single model). But don't have time to dig in further, so going with age-specific ranking again this year.
+
+Age  |  Observations | Model Selection
+-- | -- | --
+Age 3 | TimeSeriesExpSmoothBC is top-ranked all years
+ | TimeSeriesExpSmoothBC because top-ranked all years
+Age 4 |  SibReg LogPower is top-ranked all years, but SibReg Kalman is 2nd and gives much higher 2026 FC after Log-Power underpredicted in 2025.
+ | SibReg LogPower because top-ranked all years
+Age 5 |   TimeSeries Arima BC top-ranked in all years | TimeSeries Arima BC clearly top-ranked and same model as selected last year
+Age 6 |  SibReg Simple top-ranked in all years. Most years it gives a similar FC as the 2nd ranked model, which is SibReg Kalman in most years | SibReg Simple clearly top-ranked and same model as selected last year
 
 
+*Naknek*
+
+Age  |  Observations | Model Selection
+-- | -- | --
+Age 3 | Text | Text
+Age 4 |  Text | Text
+Age 5 |  Text | Text
+Age 6 |  Text | Text
+
+
+*Nushagak*
+
+Age  |  Observations | Model Selection
+-- | -- | --
+Age 3 | Text | Text
+Age 4 |  Text | Text
+Age 5 |  Text | Text
+Age 6 |  Text | Text
+
+
+*Ugashik*
+
+Age  |  Observations | Model Selection
+-- | -- | --
+Age 3 | Text | Text
+Age 4 |  Text | Text
+Age 5 |  Text | Text
+Age 6 |  Text | Text
+
+*Wood*
+
+Age  |  Observations | Model Selection
+-- | -- | --
+Age 3 | Text | Text
+Age 4 |  Text | Text
+Age 5 |  Text | Text
+Age 6 |  Text | Text
 
 
 
